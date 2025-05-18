@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FillGaps.StockTrack.ConsoleApp.Domain.Entities;
 using FillGaps.StockTrack.ConsoleApp.Domain.Repositories;
 
-namespace FillGaps.StockTrack.ConsoleApp.Infrastructure
+namespace FillGaps.StockTrack.ConsoleApp.Infrastructure.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {

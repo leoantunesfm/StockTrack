@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 using FillGaps.StockTrack.ConsoleApp.Application.Services;
 using FillGaps.StockTrack.ConsoleApp.Domain.Entities;
 using FillGaps.StockTrack.ConsoleApp.Domain.Factories;
@@ -78,10 +79,14 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
                     voltagem = Console.ReadLine() ?? "";
                     break;
                 case "Alimento":
-                    Console.Write("Data de validade (yyyy-MM-dd): ");
+                    Console.Write("Data de validade (dd/MM/yyyy): ");
                     var dataStr = Console.ReadLine();
-                    if (!DateTime.TryParse(dataStr, out var data))
+
+                    if (!DateTime.TryParseExact(dataStr, "dd/MM/yyyy",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out var data))
                         throw new Exception("Data inválida!");
+
                     dataValidade = data;
                     break;
                 case "Vestuario":
