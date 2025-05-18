@@ -4,12 +4,37 @@ StockTrack é um sistema simples de controle de estoque desenvolvido em C# com .
 
 ## Funcionalidades
 
-- Cadastro de produtos por categoria (Eletrônico, Alimento, Vestuário)
+- Cadastro de produtos por tipo (Eletrônico, Alimento, Vestuário) e classificação por categoria
 - Identificação única dos produtos por GUID e código curto numérico de 6 dígitos para fácil consulta
 - Registro de movimentações de estoque (entrada e saída)
 - Busca avançada de produtos
 - Estrutura extensível com padrão DDD (Domain-Driven Design)
 - Persistência via SQLite com suporte a migrations
+
+## Diagrama da Modelagem do Domínio
+
+```
++-------------------+         +-------------------+         +-------------------+
+|    Categoria      |         |     Produto       |         |   Movimentacao    |
+|-------------------|         |-------------------|         |-------------------|
+| - Id: Guid        |<>------>| - Id: Guid        |<------->| - Id: Guid        |
+| - Nome: string    |         | - CodigoCurto     |         | - ProdutoId: Guid |
++-------------------+         | - Nome: NomeProd  |         | - Quantidade      |
+                              | - Categoria       |         | - TipoMovimentacao|
+                              | - Estoque         |         | - Data            |
+                              +-------------------+         +-------------------+
+                              |<<abstract>>                   ^
+                              |  ^         ^                  |
+                              |  |         |                  |
+                              |  |         |                  |
+                +-------------+  |         +------------------+
+                |                |                            |
+        +---------------+ +--------------+           +-----------------+
+        |  Eletronico   | |   Alimento   |           |   Vestuario     |
+        +---------------+ +--------------+           +-----------------+
+        | - Voltagem    | | - DataValidade|          | - Tamanho       |
+        +---------------+ +--------------+           +-----------------+
+```
 
 ## Estrutura do Projeto
 

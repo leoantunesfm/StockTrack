@@ -1,0 +1,102 @@
+@startuml
+' Entidades principais
+class Produto {
+  +Guid Id
+  +string CodigoCurto
+  +NomeProduto Nome
+  +Categoria Categoria
+  +Quantidade Estoque
+  +DescricaoDetalhada()
+}
+
+abstract class Produto
+class Eletronico {
+  +string Voltagem
+}
+class Alimento {
+  +DateTime DataValidade
+}
+class Vestuario {
+  +string Tamanho
+}
+
+Produto <|-- Eletronico
+Produto <|-- Alimento
+Produto <|-- Vestuario
+
+class Categoria {
+  +Guid Id
+  +string Nome
+}
+
+class Movimentacao {
+  +Guid Id
+  +Guid ProdutoId
+  +Produto Produto
+  +Quantidade Quantidade
+  +TipoMovimentacao Tipo
+  +DateTime Data
+}
+
+' Value Objects
+class NomeProduto {
+  +string Valor
+}
+class Quantidade {
+  +int Valor
+}
+enum TipoMovimentacao {
+  Entrada
+  Saida
+}
+
+' Aggregates
+Categoria "1" o-- "*" Produto : "Categoria"
+Produto "1" o-- "*" Movimentacao : "Movimentações"
+Produto o-- NomeProduto
+Produto o-- Quantidade
+Movimentacao o-- Quantidade
+
+' Repositories
+interface IProdutoRepository {
+  +Adicionar(Produto)
+  +ObterPorId(Guid)
+  +ObterPorCodigoCurto(string)
+  +ObterTodos()
+  +Atualizar(Produto)
+  +Remover(Guid)
+}
+interface ICategoriaRepository {
+  +ObterPorId(Guid)
+  +ObterPorNome(string)
+  +Adicionar(Categoria)
+  +ObterTodas()
+}
+interface IMovimentacaoRepository {
+  +Adicionar(Movimentacao)
+  +ObterPorProduto(Guid)
+  +ObterTodas()
+}
+
+' Application Services
+class ProdutoAppService
+class CategoriaAppService
+class MovimentacaoAppService
+
+ProdutoAppService ..> IProdutoRepository
+CategoriaAppService ..> ICategoriaRepository
+MovimentacaoAppService ..> IMovimentacaoRepository
+MovimentacaoAppService ..> MovimentacaoService
+
+' Domain Services
+class MovimentacaoService
+class BuscaAvancadaProdutoService
+
+MovimentacaoService ..> IProdutoRepository
+MovimentacaoService ..> IMovimentacaoRepository
+BuscaAvancadaProdutoService ..> IProdutoRepository
+
+' Factory
+class ProdutoFactory
+
+@enduml
