@@ -101,10 +101,10 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
         public void RegistrarMovimentacao(bool entrada)
         {
             ListarProdutos();
-            Console.Write("Informe o ID do produto: ");
-            var idStr = Console.ReadLine();
-            if (!Guid.TryParse(idStr, out Guid id))
-                throw new Exception("ID inválido!");
+            Console.Write("Informe o Codigo Curto do produto: ");
+            var CodigoCurtoStr = Console.ReadLine();
+
+            var produto = _produtoAppService.ObterPorCodigoCurto(CodigoCurtoStr);
 
             Console.Write("Quantidade: ");
             var qtdStr = Console.ReadLine();
@@ -114,9 +114,9 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             var quantidade = new Quantidade(qtd);
 
             if (entrada)
-                _movimentacaoAppService.RegistrarEntrada(id, quantidade);
+                _movimentacaoAppService.RegistrarEntrada(produto.Id, quantidade);
             else
-                _movimentacaoAppService.RegistrarSaida(id, quantidade);
+                _movimentacaoAppService.RegistrarSaida(produto.Id, quantidade);
 
             Console.WriteLine("Movimentação registrada com sucesso!");
         }
