@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects;
 
 namespace FillGaps.StockTrack.ConsoleApp.Domain.Entities
 {
     public abstract class Produto
     {
         public Guid Id { get; set; }
-        public NomeProduto Nome { get; set; } = null!;
+        public NomeProduto Nome { get; set; }
         public Guid CategoriaId { get; set; }
-        public Categoria Categoria { get; set; } = null!;
+        public Categoria Categoria { get; set; }
         public Quantidade Estoque { get; set; }
 
         public Produto() { }
