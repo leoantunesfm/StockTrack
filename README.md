@@ -16,16 +16,19 @@ StockTrack é um sistema simples de controle de estoque desenvolvido em C# com .
 ```
 StockTrack.ConsoleApp/
 ├── Application/
-│   ├── Factories/
-│   └── Services/
+│   ├── Services/
+│   └── App/
 ├── Domain/
 │   ├── Entities/
+│   ├── Factories/
+│   ├── Repositories/
+│   ├── Services/
 │   └── ValueObjects/
 ├── Infrastructure/
 │   ├── Repositories/
-│   └── StockTrackDbContext.cs
+│   └── StockTrackDbContext
 ├── Migrations/
-├── Program.cs
+├── Interface
 └── README.md
 ```
 
@@ -78,9 +81,5 @@ dotnet ef database update --project StockTrack.ConsoleApp
 3. Commit suas alterações (`git commit -am 'Adiciona nova feature'`)
 4. Faça push para sua branch (`git push origin feature/nome-feature`)
 5. Abra um Pull Request
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT.
 
 ---
