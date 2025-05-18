@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FillGaps.StockTrack.ConsoleApp.Application.Factories;
 using FillGaps.StockTrack.ConsoleApp.Application.Services;
 using FillGaps.StockTrack.ConsoleApp.Domain.Entities;
+using FillGaps.StockTrack.ConsoleApp.Domain.Services;
 using FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects;
 using FillGaps.StockTrack.ConsoleApp.Infrastructure;
 
@@ -16,15 +17,18 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
         private readonly ProdutoAppService _produtoAppService;
         private readonly MovimentacaoAppService _movimentacaoAppService;
         private readonly StockTrackDbContext _context;
+        private readonly BuscaAvancadaProdutoService _buscaAvancadaProdutoService;
 
         public StockTrackApp(
             ProdutoAppService produtoAppService,
             MovimentacaoAppService movimentacaoAppService,
-            StockTrackDbContext context)
+            StockTrackDbContext context,
+            BuscaAvancadaProdutoService buscaAvancadaProdutoService)
         {
             _produtoAppService = produtoAppService;
             _movimentacaoAppService = movimentacaoAppService;
             _context = context;
+            _buscaAvancadaProdutoService = buscaAvancadaProdutoService;
         }
 
         public void ListarProdutos()
@@ -130,6 +134,23 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             foreach (var m in movimentacoes)
             {
                 Console.WriteLine($"{m.Data:dd/MM/yyyy HH:mm} | {m.Tipo} | Quantidade: {m.Quantidade.Valor}");
+            }
+        }
+
+        public void BuscarProdutosAvancado()
+        {
+            Console.Write("Digite parte do nome do produto (ou deixe vazio): ");
+            var nome = Console.ReadLine();
+
+            Console.Write("Digite parte da categoria (ou deixe vazio): ");
+            var categoria = Console.ReadLine();
+
+            var produtos = _buscaAvancadaProdutoService.Buscar(nome, categoria);
+
+            Console.WriteLine("\nResultados da busca:");
+            foreach (var p in produtos)
+            {
+                Console.WriteLine($"- [{p.Id}] {p.Nome.Valor} | Categoria: {p.Categoria.Nome} | Estoque: {p.Estoque.Valor}");
             }
         }
     }

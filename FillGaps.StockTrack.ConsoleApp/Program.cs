@@ -20,11 +20,17 @@ class Program
         var produtoRepository = new ProdutoRepository(context);
         var movimentacaoRepository = new MovimentacaoRepository(context);
         var movimentacaoService = new MovimentacaoService(produtoRepository, movimentacaoRepository);
+        var buscaAvancadaProdutoService = new BuscaAvancadaProdutoService(produtoRepository);
 
         var produtoAppService = new ProdutoAppService(produtoRepository);
         var movimentacaoAppService = new MovimentacaoAppService(movimentacaoService, movimentacaoRepository);
 
-        var app = new StockTrackApp(produtoAppService, movimentacaoAppService, context);
+        var app = new StockTrackApp(
+            produtoAppService,
+            movimentacaoAppService,
+            context,
+            buscaAvancadaProdutoService
+        );
 
         while (true)
         {
@@ -34,6 +40,7 @@ class Program
             Console.WriteLine("3. Registrar entrada (estoque)");
             Console.WriteLine("4. Registrar saída (estoque)");
             Console.WriteLine("5. Listar movimentações de produto");
+            Console.WriteLine("6. Busca avançada de produtos");
             Console.WriteLine("0. Sair");
             Console.Write("Opção: ");
 
@@ -59,6 +66,9 @@ class Program
                         break;
                     case "5":
                         app.ListarMovimentacoes();
+                        break;
+                    case "6":
+                        app.BuscarProdutosAvancado();
                         break;
                     default:
                         Console.WriteLine("Opção inválida!");
