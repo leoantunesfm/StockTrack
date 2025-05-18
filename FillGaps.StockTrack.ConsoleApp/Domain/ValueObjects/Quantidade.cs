@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 namespace FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects
 {
     [Owned]
-    public readonly struct Quantidade
+    public class Quantidade
     {
-        public int Valor { get; }
+        public int Valor { get; private set; }
 
         public Quantidade(int valor)
         {
@@ -18,6 +18,8 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects
                 throw new ArgumentException("A quantidade não pode ser negativa.");
             Valor = valor;
         }
+
+        private Quantidade() { }
 
         public Quantidade Somar(Quantidade outra) => new Quantidade(this.Valor + outra.Valor);
 

@@ -9,18 +9,19 @@ using Microsoft.EntityFrameworkCore;
 namespace FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects
 {
     [Owned]
-    public readonly struct NomeProduto
+    public class NomeProduto
     {
         [MaxLength(100)]
-        public string Valor { get; }
+        public string Valor { get; private set; }
 
         public NomeProduto(string valor)
         {
             if (string.IsNullOrWhiteSpace(valor))
                 throw new ArgumentException("O nome do produto não pode ser vazio.");
-
             Valor = valor.Trim();
         }
+
+        private NomeProduto() { }
 
         public override string ToString() => Valor;
     }
