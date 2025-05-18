@@ -18,6 +18,16 @@ namespace FillGaps.StockTrack.ConsoleApp.Infrastructure
         public StockTrackDbContext(DbContextOptions<StockTrackDbContext> options)
             : base(options) { }
 
+        public StockTrackDbContext() { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=stocktrack.db");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Herança TPH para Produto

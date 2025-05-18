@@ -15,7 +15,7 @@ class Program
             .Options;
 
         using var context = new StockTrackDbContext(options);
-        context.Database.EnsureCreated();
+        context.Database.Migrate();
 
         var produtoRepository = new ProdutoRepository(context);
         var movimentacaoRepository = new MovimentacaoRepository(context);
