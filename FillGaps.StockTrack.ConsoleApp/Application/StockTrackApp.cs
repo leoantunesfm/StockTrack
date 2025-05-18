@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FillGaps.StockTrack.ConsoleApp.Application.Services;
 using FillGaps.StockTrack.ConsoleApp.Domain.Entities;
 using FillGaps.StockTrack.ConsoleApp.Domain.Factories;
+using FillGaps.StockTrack.ConsoleApp.Domain.Repositories;
 using FillGaps.StockTrack.ConsoleApp.Domain.Services;
 using FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects;
 using FillGaps.StockTrack.ConsoleApp.Infrastructure;
@@ -18,17 +19,20 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
         private readonly MovimentacaoAppService _movimentacaoAppService;
         private readonly StockTrackDbContext _context;
         private readonly BuscaAvancadaProdutoService _buscaAvancadaProdutoService;
+        private readonly CategoriaAppService _categoriaAppService;
 
         public StockTrackApp(
             ProdutoAppService produtoAppService,
             MovimentacaoAppService movimentacaoAppService,
             StockTrackDbContext context,
-            BuscaAvancadaProdutoService buscaAvancadaProdutoService)
+            BuscaAvancadaProdutoService buscaAvancadaProdutoService,
+            CategoriaAppService categoriaAppService)
         {
             _produtoAppService = produtoAppService;
             _movimentacaoAppService = movimentacaoAppService;
             _context = context;
             _buscaAvancadaProdutoService = buscaAvancadaProdutoService;
+            _categoriaAppService = categoriaAppService;
         }
 
         public void ListarProdutos()
@@ -57,7 +61,7 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             if (!int.TryParse(estoqueStr, out int estoqueVal) || estoqueVal < 0)
                 throw new Exception("Estoque inválido!");
 
-            var categoria = _context.Categorias.FirstOrDefault(c => c.Nome == categoriaNome)
+            var categoria = _categoriaAppService.ObterPorNome(categoriaNome)
                 ?? new Categoria(categoriaNome);
 
             var nomeProduto = new NomeProduto(nome);
@@ -89,8 +93,8 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             }
 
             // Salva nova categoria caso necessário
-            if (categoria.Id == Guid.Empty || _context.Categorias.All(c => c.Id != categoria.Id))
-                _context.Categorias.Add(categoria);
+            if (categoria.Id == Guid.Empty || _categoriaAppService.ObterPorId(categoria.Id) == null)
+                _categoriaAppService.Adicionar(categoria);
 
             var produto = ProdutoFactory.CriarProduto(tipo, nomeProduto, categoria, quantidade, voltagem, dataValidade, tamanho);
             _produtoAppService.Adicionar(produto);
@@ -102,9 +106,9 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
         {
             ListarProdutos();
             Console.Write("Informe o Codigo Curto do produto: ");
-            var CodigoCurtoStr = Console.ReadLine();
+            var CodigoCurto = Console.ReadLine();
 
-            var produto = _produtoAppService.ObterPorCodigoCurto(CodigoCurtoStr);
+            var produto = _produtoAppService.ObterPorCodigoCurto(CodigoCurto);
 
             Console.Write("Quantidade: ");
             var qtdStr = Console.ReadLine();
@@ -125,9 +129,9 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
         {
             ListarProdutos();
             Console.Write("Informe o Codigo Curto do produto: ");
-            var CodigoCurtoStr = Console.ReadLine();
+            var CodigoCurto = Console.ReadLine();
 
-            var produto = _produtoAppService.ObterPorCodigoCurto(CodigoCurtoStr);
+            var produto = _produtoAppService.ObterPorCodigoCurto(CodigoCurto);
 
             var movimentacoes = _movimentacaoAppService.ListarPorProduto(produto.Id);
             Console.WriteLine("\nMovimentações:");

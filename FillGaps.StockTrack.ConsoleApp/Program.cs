@@ -19,17 +19,20 @@ class Program
 
         var produtoRepository = new ProdutoRepository(context);
         var movimentacaoRepository = new MovimentacaoRepository(context);
+        var categoriaRepository = new CategoriaRepository(context);
         var movimentacaoService = new MovimentacaoService(produtoRepository, movimentacaoRepository);
         var buscaAvancadaProdutoService = new BuscaAvancadaProdutoService(produtoRepository);
 
         var produtoAppService = new ProdutoAppService(produtoRepository);
         var movimentacaoAppService = new MovimentacaoAppService(movimentacaoService, movimentacaoRepository);
+        var categoriaAppService = new CategoriaAppService(categoriaRepository);
 
         var app = new StockTrackApp(
             produtoAppService,
             movimentacaoAppService,
             context,
-            buscaAvancadaProdutoService
+            buscaAvancadaProdutoService,
+            categoriaAppService
         );
 
         while (true)
