@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FillGaps.StockTrack.ConsoleApp.Domain.Entities;
 using FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects;
 
-namespace FillGaps.StockTrack.ConsoleApp.Application.Factories
+namespace FillGaps.StockTrack.ConsoleApp.Domain.Factories
 {
     public static class ProdutoFactory
     {
