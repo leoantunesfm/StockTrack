@@ -3,6 +3,7 @@ using System;
 using FillGaps.StockTrack.ConsoleApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FillGaps.StockTrack.ConsoleApp.Migrations
 {
     [DbContext(typeof(StockTrackDbContext))]
-    partial class StockTrackDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250518043047_AdicionaCodigoCurtoProduto")]
+    partial class AdicionaCodigoCurtoProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");

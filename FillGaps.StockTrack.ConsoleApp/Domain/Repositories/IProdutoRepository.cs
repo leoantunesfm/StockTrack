@@ -11,6 +11,7 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Repositories
     {
         void Adicionar(Produto produto);
         Produto? ObterPorId(Guid id);
+        Produto? ObterPorCodigoCurto(string codigoCurto);
         IEnumerable<Produto> ObterTodos();
         void Atualizar(Produto produto);
         void Remover(Guid id);

@@ -27,6 +27,11 @@ namespace FillGaps.StockTrack.ConsoleApp.Application.Services
             return _produtoRepository.ObterPorId(id);
         }
 
+        public Produto? ObterPorCodigoCurto(string codigoCurto)
+        {
+            return _produtoRepository.ObterPorCodigoCurto(codigoCurto);
+        }
+
         public void Adicionar(Produto produto)
         {
             _produtoRepository.Adicionar(produto);

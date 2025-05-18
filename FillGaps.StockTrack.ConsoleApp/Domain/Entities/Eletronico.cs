@@ -12,8 +12,8 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Entities
         public string Voltagem { get; set; } = string.Empty;
 
         public Eletronico() { }
-        public Eletronico(NomeProduto nome, Categoria categoria, Quantidade estoque, string voltagem)
-            : base(nome, categoria, estoque)
+        public Eletronico(Guid id, string codigoCurto, NomeProduto nome, Categoria categoria, Quantidade estoque, string voltagem)
+            : base(id, codigoCurto, nome, categoria, estoque)
         {
             Voltagem = voltagem;
         }

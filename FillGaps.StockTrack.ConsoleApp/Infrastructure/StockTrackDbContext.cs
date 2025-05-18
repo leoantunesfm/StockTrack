@@ -37,6 +37,10 @@ namespace FillGaps.StockTrack.ConsoleApp.Infrastructure
                 .HasValue<Alimento>("Alimento")
                 .HasValue<Vestuario>("Vestuario");
 
+            modelBuilder.Entity<Produto>()
+                .HasIndex(p => p.CodigoCurto)
+                .IsUnique();
+
             // Value Objects como Owned
             modelBuilder.Entity<Produto>().OwnsOne(p => p.Nome);
             modelBuilder.Entity<Produto>().OwnsOne(p => p.Estoque);

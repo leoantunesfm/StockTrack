@@ -37,7 +37,7 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             Console.WriteLine("\nProdutos cadastrados:");
             foreach (var p in produtos)
             {
-                Console.WriteLine($"- [{p.Id}] {p.Nome.Valor} | Categoria: {p.Categoria.Nome} | Estoque: {p.Estoque.Valor}");
+                Console.WriteLine($"- [{p.CodigoCurto}] {p.Nome.Valor} | Categoria: {p.Categoria.Nome} | Estoque: {p.Estoque.Valor}");
             }
         }
 
@@ -124,12 +124,12 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
         public void ListarMovimentacoes()
         {
             ListarProdutos();
-            Console.Write("Informe o ID do produto: ");
-            var idStr = Console.ReadLine();
-            if (!Guid.TryParse(idStr, out Guid id))
-                throw new Exception("ID inválido!");
+            Console.Write("Informe o Codigo Curto do produto: ");
+            var CodigoCurtoStr = Console.ReadLine();
 
-            var movimentacoes = _movimentacaoAppService.ListarPorProduto(id);
+            var produto = _produtoAppService.ObterPorCodigoCurto(CodigoCurtoStr);
+
+            var movimentacoes = _movimentacaoAppService.ListarPorProduto(produto.Id);
             Console.WriteLine("\nMovimentações:");
             foreach (var m in movimentacoes)
             {
@@ -150,7 +150,7 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             Console.WriteLine("\nResultados da busca:");
             foreach (var p in produtos)
             {
-                Console.WriteLine($"- [{p.Id}] {p.Nome.Valor} | Categoria: {p.Categoria.Nome} | Estoque: {p.Estoque.Valor}");
+                Console.WriteLine($"- [{p.CodigoCurto}] {p.Nome.Valor} | Categoria: {p.Categoria.Nome} | Estoque: {p.Estoque.Valor}");
             }
         }
     }

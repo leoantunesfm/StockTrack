@@ -31,6 +31,13 @@ namespace FillGaps.StockTrack.ConsoleApp.Infrastructure.Repositories
                 .FirstOrDefault(p => p.Id == id);
         }
 
+        public Produto? ObterPorCodigoCurto(string codigoCurto)
+        {
+            return _context.Produtos
+                .Include(p => p.Categoria)
+                .FirstOrDefault(p => p.CodigoCurto == codigoCurto);
+        }
+
         public IEnumerable<Produto> ObterTodos()
         {
             return _context.Produtos

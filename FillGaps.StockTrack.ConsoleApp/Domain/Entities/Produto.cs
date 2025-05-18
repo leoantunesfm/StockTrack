@@ -9,21 +9,29 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Entities
 {
     public abstract class Produto
     {
-        public Guid Id { get; set; }
-        public NomeProduto Nome { get; set; }
-        public Guid CategoriaId { get; set; }
-        public Categoria Categoria { get; set; }
-        public Quantidade Estoque { get; set; }
+        public Guid Id { get; private set; }
+        public string CodigoCurto { get; private set; }
+        public NomeProduto Nome { get; private set; }
+        public Categoria Categoria { get; private set; }
+        public Quantidade Estoque { get; private set; }
+
+        protected Produto(Guid id, string codigoCurto, NomeProduto nome, Categoria categoria, Quantidade estoque)
+        {
+            Id = id;
+            CodigoCurto = codigoCurto;
+            Nome = nome;
+            Categoria = categoria;
+            Estoque = estoque;
+        }
 
         public Produto() { }
 
-        protected Produto(NomeProduto nome, Categoria categoria, Quantidade estoque)
+        public static string GerarCodigoCurto(Guid guid)
         {
-            Id = Guid.NewGuid();
-            Nome = nome;
-            Categoria = categoria;
-            CategoriaId = categoria.Id;
-            Estoque = estoque;
+            var bytes = guid.ToByteArray();
+            int valor = BitConverter.ToInt32(bytes, 0);
+            valor = Math.Abs(valor);
+            return valor.ToString("D6").Substring(0, 6);
         }
 
         public abstract string DescricaoDetalhada();

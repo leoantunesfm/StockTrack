@@ -12,8 +12,8 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Entities
         public DateTime DataValidade { get; set; }
 
         public Alimento() { }
-        public Alimento(NomeProduto nome, Categoria categoria, Quantidade estoque, DateTime dataValidade)
-            : base(nome, categoria, estoque)
+        public Alimento(Guid id, string codigoCurto, NomeProduto nome, Categoria categoria, Quantidade estoque, DateTime dataValidade)
+            : base(id, codigoCurto, nome, categoria, estoque)
         {
             DataValidade = dataValidade;
         }

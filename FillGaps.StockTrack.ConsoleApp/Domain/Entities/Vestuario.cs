@@ -12,8 +12,8 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Entities
         public string Tamanho { get; set; } = string.Empty;
 
         public Vestuario() { }
-        public Vestuario(NomeProduto nome, Categoria categoria, Quantidade estoque, string tamanho)
-            : base(nome, categoria, estoque)
+        public Vestuario(Guid id, string codigoCurto, NomeProduto nome, Categoria categoria, Quantidade estoque, string tamanho)
+            : base(id, codigoCurto, nome, categoria, estoque)
         {
             Tamanho = tamanho;
         }
