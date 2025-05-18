@@ -20,11 +20,8 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Services
             _movimentacaoRepository = movimentacaoRepository;
         }
 
-        public void RegistrarEntrada(Guid produtoId, Quantidade quantidade)
+        public void RegistrarEntrada(Produto produto, Quantidade quantidade)
         {
-            var produto = _produtoRepository.ObterPorId(produtoId)
-                ?? throw new InvalidOperationException("Produto não encontrado.");
-
             produto.IncluirEstoque(quantidade);
 
             var movimentacao = new Movimentacao(produto, quantidade, TipoMovimentacao.Entrada);
@@ -33,11 +30,8 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Services
             _produtoRepository.Atualizar(produto);
         }
 
-        public void RegistrarSaida(Guid produtoId, Quantidade quantidade)
+        public void RegistrarSaida(Produto produto, Quantidade quantidade)
         {
-            var produto = _produtoRepository.ObterPorId(produtoId)
-                ?? throw new InvalidOperationException("Produto não encontrado.");
-
             produto.BaixarEstoque(quantidade);
 
             var movimentacao = new Movimentacao(produto, quantidade, TipoMovimentacao.Saida);

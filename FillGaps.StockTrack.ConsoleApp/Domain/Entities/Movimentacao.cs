@@ -24,7 +24,7 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.Entities
             ProdutoId = produto.Id;
             Quantidade = quantidade;
             Tipo = tipo;
-            Data = DateTime.UtcNow;
+            Data = DateTime.Now;
         }
     }
 }

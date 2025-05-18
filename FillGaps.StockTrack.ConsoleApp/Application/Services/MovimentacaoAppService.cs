@@ -21,14 +21,14 @@ namespace FillGaps.StockTrack.ConsoleApp.Application.Services
             _movimentacaoRepository = movimentacaoRepository;
         }
 
-        public void RegistrarEntrada(Guid produtoId, Quantidade quantidade)
+        public void RegistrarEntrada(Produto produto, Quantidade quantidade)
         {
-            _movimentacaoService.RegistrarEntrada(produtoId, quantidade);
+            _movimentacaoService.RegistrarEntrada(produto, quantidade);
         }
 
-        public void RegistrarSaida(Guid produtoId, Quantidade quantidade)
+        public void RegistrarSaida(Produto produto, Quantidade quantidade)
         {
-            _movimentacaoService.RegistrarSaida(produtoId, quantidade);
+            _movimentacaoService.RegistrarSaida(produto, quantidade);
         }
 
         public IEnumerable<Movimentacao> ListarPorProduto(Guid produtoId)

@@ -123,9 +123,9 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             var quantidade = new Quantidade(qtd);
 
             if (entrada)
-                _movimentacaoAppService.RegistrarEntrada(produto.Id, quantidade);
+                _movimentacaoAppService.RegistrarEntrada(produto, quantidade);
             else
-                _movimentacaoAppService.RegistrarSaida(produto.Id, quantidade);
+                _movimentacaoAppService.RegistrarSaida(produto, quantidade);
 
             Console.WriteLine("Movimentação registrada com sucesso!");
         }
