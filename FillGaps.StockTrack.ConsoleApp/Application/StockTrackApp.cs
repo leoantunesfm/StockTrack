@@ -59,13 +59,12 @@ namespace FillGaps.StockTrack.ConsoleApp.Application
             Console.Write("Estoque inicial: ");
             var estoqueStr = Console.ReadLine();
 
-            if (!int.TryParse(estoqueStr, out int estoqueVal) || estoqueVal < 0)
-                throw new Exception("Estoque inválido!");
-
             var categoria = _categoriaAppService.ObterPorNome(categoriaNome)
                 ?? new Categoria(categoriaNome);
 
             var nomeProduto = new NomeProduto(nome);
+
+            int.TryParse(estoqueStr, out int estoqueVal);
             var quantidade = new Quantidade(estoqueVal);
 
             // Solicita campos específicos conforme o tipo

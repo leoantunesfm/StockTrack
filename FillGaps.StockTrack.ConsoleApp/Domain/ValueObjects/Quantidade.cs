@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FillGaps.StockTrack.ConsoleApp.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects
@@ -14,20 +15,20 @@ namespace FillGaps.StockTrack.ConsoleApp.Domain.ValueObjects
 
         public Quantidade(int valor)
         {
-            if (valor < 0)
-                throw new ArgumentException("A quantidade não pode ser negativa.");
+            if (valor <= 0)
+                throw new ValorInvalidoException();
             Valor = valor;
         }
 
         private Quantidade() { }
 
-        public Quantidade Somar(Quantidade outra) => new Quantidade(this.Valor + outra.Valor);
+        public Quantidade Somar(Quantidade quantidade) => new Quantidade(this.Valor + quantidade.Valor);
 
-        public Quantidade Subtrair(Quantidade outra)
+        public Quantidade Subtrair(Quantidade quantidade)
         {
-            if (this.Valor < outra.Valor)
-                throw new InvalidOperationException("Não é possível subtrair uma quantidade maior que a disponível.");
-            return new Quantidade(this.Valor - outra.Valor);
+            if (this.Valor < quantidade.Valor)
+                throw new QuantidadeInsuficienteException();
+            return new Quantidade(this.Valor - quantidade.Valor);
         }
 
         public override string ToString() => Valor.ToString();
