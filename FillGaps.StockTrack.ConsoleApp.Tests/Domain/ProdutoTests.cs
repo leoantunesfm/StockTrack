@@ -12,7 +12,7 @@ namespace FillGaps.StockTrack.ConsoleApp.Tests.Domain
     [TestClass]
     public class ProdutoTests
     {
-        private Categoria CriarCategoria() => new Categoria("Eletrônicos");
+        private Categoria CriarCategoria() => new Categoria("Informática");
         private NomeProduto CriarNomeProduto(string nome = "Notebook") => new NomeProduto(nome);
 
         [TestMethod]
