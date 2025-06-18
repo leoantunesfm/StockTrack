@@ -77,7 +77,7 @@ StockTrack.ConsoleApp/
    ```
    
 
-2. **Abra o arquivo de solção com o Visual Studio (Prefencialmente versão 2022):**
+2. **Abra o arquivo de solução com o Visual Studio (Prefencialmente versão 2022):**
    ```bash
    ..\StockTrack\FillGaps.StockTrack.ConsoleApp\FillGaps.StockTrack.ConsoleApp.sln
    ```
