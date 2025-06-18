@@ -65,25 +65,29 @@ StockTrack.ConsoleApp/
 ## Como rodar o projeto
 
 1. **Clone o repositório:**
+
+- Via SSH:
    ```bash
-   git clone https://github.com/seuusuario/StockTrack.git
-   cd StockTrack
+   git clone git@github.com:leoantunesfm/StockTrack.git
    ```
 
-2. **Restaure os pacotes:**
+- Via HTTPS:
    ```bash
-   dotnet restore
+   https://github.com/leoantunesfm/StockTrack.git
+   ```
+   
+
+2. **Abra o arquivo de solção com o Visual Studio (Prefencialmente versão 2022):**
+   ```bash
+   ..\StockTrack\FillGaps.StockTrack.ConsoleApp\FillGaps.StockTrack.ConsoleApp.sln
    ```
 
-3. **Aplique as migrations para criar o banco:**
-   ```bash
-   dotnet ef database update --project StockTrack.ConsoleApp
-   ```
+3. **Ctrl + F5 para executar**
 
-4. **Execute o projeto:**
-   ```bash
-   dotnet run --project StockTrack.ConsoleApp
-   ```
+- Isso compilará e executará o projeto em modo sem depuração, e você verá a aplicação de console sendo iniciada.
+- O projeto conta com persistencia com SQLite, EF Core e migrations. Ao executar o projeto o banco de dados será criado.
+- Nos seus testes os registros cadastrados não serão perdidos ao finalizar a execução da aplicação.
+
 
 ## Gerenciamento do Banco de Dados
 
