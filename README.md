@@ -29,11 +29,11 @@ StockTrack é um sistema simples de controle de estoque desenvolvido em C# com .
                               |  |         |                  
                 +-------------+  |         +------------------+
                 |                |                            |
-        +---------------+ +--------------+           +-----------------+
-        |  Eletronico   | |   Alimento   |           |   Vestuario     |
-        +---------------+ +--------------+           +-----------------+
-        | - Voltagem    | | - DataValidade|          | - Tamanho       |
-        +---------------+ +--------------+           +-----------------+
+        +---------------+ +---------------+           +-----------------+
+        |  Eletronico   | |   Alimento    |           |   Vestuario     |
+        +---------------+ +---------------+           +-----------------+
+        | - Voltagem    | | - DataValidade|           | - Tamanho       |
+        +---------------+ +---------------+           +-----------------+
 ```
 
 ## Estrutura do Projeto
