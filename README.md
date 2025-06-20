@@ -73,7 +73,7 @@ StockTrack.ConsoleApp/
 
 - Via HTTPS:
    ```bash
-   https://github.com/leoantunesfm/StockTrack.git
+   git clone https://github.com/leoantunesfm/StockTrack.git
    ```
    
 
